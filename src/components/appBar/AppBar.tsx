@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import AssetsBlock from "./assetsBlock/AssetsBlock";
 import UploadImgBlock from "./uploadImgBlock/UploadImgBlock";
@@ -9,12 +10,16 @@ const Box = styled.div`
   padding: 20px;
 `;
 
-const AppBar: React.FC = () => {
+interface IProps {
+  setTextItems: Dispatch<SetStateAction<string[]>>;
+}
+
+const AppBar: React.FC<IProps> = ({setTextItems}) => {
   return (
     <Box>
       <UploadImgBlock />
 
-      <AssetsBlock />
+      <AssetsBlock setTextItems={setTextItems} />
     </Box>
   );
 };

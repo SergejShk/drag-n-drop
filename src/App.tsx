@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import AppBar from "./components/appBar/AppBar";
 import DropZone from "./components/dropZone/DropZone";
@@ -8,10 +9,14 @@ const Container = styled.div`
 `;
 
 const App: React.FC = () => {
+  const [textItems, setTextItems] = useState<string[]>([]);
+
   return (
     <Container>
-      <AppBar />
-      <DropZone />
+      <AppBar
+       setTextItems={setTextItems}
+      />
+      <DropZone textItems={textItems} />
     </Container>
   );
 };

@@ -1,13 +1,18 @@
+import { Dispatch, SetStateAction } from "react";
 import TitleBlock from "../shared/titleBlock/TitleBlock";
 import AddText from "./addText/AddText";
 import Images from "./imagesBlock/ImagesBlock";
 
-const AssetsBlock: React.FC = () => {
+interface IProps {
+  setTextItems: Dispatch<SetStateAction<string[]>>;
+}
+
+const AssetsBlock: React.FC<IProps> = ({ setTextItems }) => {
   return (
     <>
       <TitleBlock>Assets</TitleBlock>
 
-      <AddText />
+      <AddText setTextItems={setTextItems} />
       <Images />
     </>
   );

@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import SubTitle from "../../shared/subTitle/SubTitle";
 
@@ -30,13 +31,31 @@ const Button = styled.button`
   border: 1px solid #00979e;
 `;
 
-const AddText: React.FC = () => {
+interface IProps {
+  setTextItems: Dispatch<SetStateAction<string[]>>;
+}
+
+const AddText: React.FC<IProps> = ({ setTextItems }) => {
+  const [text, setText] = useState("");
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setTextItems((prev) => [...prev, text]);
+    setText("");
+  };
+
   return (
     <>
       <SubTitle>Text</SubTitle>
-
-      <Input type="text" />
-      <Button type="button">Add text</Button>
+      <form onSubmit={handleSubmit}>
+        <Input type="text" value={text} onChange={onChangeInput} />
+        <Button type="submit">Add text</Button>
+      </form>
     </>
   );
 };
