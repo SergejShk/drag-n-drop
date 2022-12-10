@@ -11,7 +11,7 @@ interface IProps {
 
 const DropZone: React.FC<IProps> = ({ textItems, itemImg }) => {
   const nodeRef = useRef(null);
-  const areaRef = useRef<HTMLDivElement>();
+  const areaRef = useRef<HTMLDivElement>(null);
 
   const [items, setItems] = useState<{}[]>([]);
 

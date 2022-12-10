@@ -22,6 +22,7 @@ export const TextItem = styled.p`
   top: 0;
   left: 0;
   border: 1px solid transparent;
+  cursor: context-menu;
 
   &:hover {
     border: 1px solid #b3e7e9;
