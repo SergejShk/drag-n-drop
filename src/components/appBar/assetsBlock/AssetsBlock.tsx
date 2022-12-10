@@ -1,19 +1,21 @@
 import { Dispatch, SetStateAction } from "react";
+import { TItemImg } from "../../../types/dragItems";
 import TitleBlock from "../shared/titleBlock/TitleBlock";
 import AddText from "./addText/AddText";
-import Images from "./imagesBlock/ImagesBlock";
+import ImagesBlock from "./imagesBlock/ImagesBlock";
 
 interface IProps {
-  setTextItems: Dispatch<SetStateAction<string[]>>;
+  setTextItems: Dispatch<SetStateAction<string>>;
+  setItemImg: Dispatch<TItemImg>;
 }
 
-const AssetsBlock: React.FC<IProps> = ({ setTextItems }) => {
+const AssetsBlock: React.FC<IProps> = ({ setTextItems, setItemImg }) => {
   return (
     <>
       <TitleBlock>Assets</TitleBlock>
 
       <AddText setTextItems={setTextItems} />
-      <Images />
+      <ImagesBlock setItemImg={setItemImg} />
     </>
   );
 };

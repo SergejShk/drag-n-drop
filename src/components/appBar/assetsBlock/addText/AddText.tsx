@@ -32,7 +32,7 @@ const Button = styled.button`
 `;
 
 interface IProps {
-  setTextItems: Dispatch<SetStateAction<string[]>>;
+  setTextItems: Dispatch<SetStateAction<string>>;
 }
 
 const AddText: React.FC<IProps> = ({ setTextItems }) => {
@@ -45,7 +45,7 @@ const AddText: React.FC<IProps> = ({ setTextItems }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    setTextItems((prev) => [...prev, text]);
+    setTextItems(text);
     setText("");
   };
 
