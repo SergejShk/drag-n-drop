@@ -15,6 +15,7 @@ export const Input = styled.input`
 `;
 
 export const CustomInput = styled.div`
+  cursor: pointer;
   width: 260px;
   height: 160px;
   border: 1px dashed #00979e;
