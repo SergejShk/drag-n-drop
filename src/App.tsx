@@ -3,22 +3,12 @@ import styled from "styled-components";
 import AppBar from "./components/appBar/AppBar";
 import DropZone from "./components/dropZone/DropZone";
 import { TItemImg } from "./types/dragItems";
+import { defaultImg } from "./utils/defaultImg";
 
 const Container = styled.div`
   display: flex;
   width: 100vw;
 `;
-
-const defaultImg = {
-  id: "",
-  type: "img",
-  src: "",
-  alt: "",
-  position: {
-    x: 0,
-    y: 0,
-  },
-};
 
 const App: React.FC = () => {
   const [textItems, setTextItems] = useState("");
