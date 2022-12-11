@@ -46,13 +46,6 @@ const DropZone: React.FC<IProps> = ({ textItems, itemImg }) => {
         onDragOver={onHandleDragOver}
         onDrop={onHandleDrop}
       >
-        {/* {textItems.length > 0 &&
-          textItems.map((item, idx) => (
-            <Draggable key={idx} nodeRef={nodeRef}>
-              <TextItem ref={nodeRef}>{item}</TextItem>
-            </Draggable>
-          ))} */}
-
         {items.length > 0 &&
           items.map((item: any, idx) => (
             <Draggable

@@ -16,9 +16,13 @@ const ImagesBlock: React.FC<IProps> = ({ setItemImg }) => {
       type: "img",
       src: e.currentTarget.src,
       alt: e.currentTarget.alt,
-      position: { x: e.currentTarget.width, y: e.currentTarget.height },
+      position: {
+        x: e.currentTarget.width,
+        y: e.currentTarget.height,
+      },
     };
     setItemImg(newEl);
+    console.log(e);
   };
 
   const handleDragEnd = (e: React.DragEvent<HTMLImageElement>) => {
