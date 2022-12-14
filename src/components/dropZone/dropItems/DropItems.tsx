@@ -29,16 +29,8 @@ const DropItems: React.FC<IProps> = ({ items }) => {
     const container = target.parentElement;
     if (!container) return;
 
-    const onMouseDown = (e: MouseEvent) => {
-      isClicked.current = true;
-      coords.current.startX = e.clientX;
-      coords.current.startY = e.clientY;
-    };
-
     const onMouseUp = (e: MouseEvent) => {
       isClicked.current = false;
-      coords.current.lastX = target.offsetLeft;
-      coords.current.lastY = target.offsetTop;
     };
 
     const onMouseMove = (e: MouseEvent) => {
@@ -51,13 +43,11 @@ const DropItems: React.FC<IProps> = ({ items }) => {
       target.style.left = `${nextX}px`;
     };
 
-    target.addEventListener("mousedown", onMouseDown);
     target.addEventListener("mouseup", onMouseUp);
     container.addEventListener("mousemove", onMouseMove);
     container.addEventListener("mouseleave", onMouseUp);
 
     const cleanup = () => {
-      target.removeEventListener("mousedown", onMouseDown);
       target.removeEventListener("mouseup", onMouseUp);
       container.removeEventListener("mousemove", onMouseMove);
       container.removeEventListener("mouseleave", onMouseUp);
@@ -65,6 +55,20 @@ const DropItems: React.FC<IProps> = ({ items }) => {
 
     return cleanup;
   }, [id]);
+
+  const handleMouseDown = (e: {
+    target: any;
+    clientY: number;
+    clientX: number;
+    currentTarget: any;
+  }) => {
+    coords.current.startX = e.clientX;
+    coords.current.startY = e.clientY;
+    coords.current.lastX = e.target.offsetLeft;
+    coords.current.lastY = e.target.offsetTop;
+    isClicked.current = true;
+    setId(e.currentTarget!.id);
+  };
 
   return (
     <>
@@ -78,16 +82,12 @@ const DropItems: React.FC<IProps> = ({ items }) => {
               alt={item.alt}
               draggable={false}
               style={{ top: item.position.y, left: item.position.x }}
-              onMouseDown={(e) => setId(e.currentTarget.id)}
+              onMouseDown={handleMouseDown}
             />
           );
         } else {
           return (
-            <TextItem
-              key={idx}
-              id={item.id}
-              onMouseDown={(e) => setId(e.currentTarget.id)}
-            >
+            <TextItem key={idx} id={item.id} onMouseDown={handleMouseDown}>
               {item.text}
             </TextItem>
           );
