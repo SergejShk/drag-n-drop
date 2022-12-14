@@ -22,7 +22,6 @@ const ImagesBlock: React.FC<IProps> = ({ setItemImg }) => {
       },
     };
     setItemImg(newEl);
-    console.log(e);
   };
 
   const handleDragEnd = (e: React.DragEvent<HTMLImageElement>) => {
@@ -37,6 +36,7 @@ const ImagesBlock: React.FC<IProps> = ({ setItemImg }) => {
         {images.map((image) => (
           <ImgBox key={image.src}>
             <Img
+              id={image.id}
               src={image.src}
               alt={image.alt}
               draggable

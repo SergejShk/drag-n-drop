@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Draggable from "react-draggable";
-import { TItemImg } from "../../types/dragItems";
-import { Box, DropArea, ImgItem, TextItem } from "./DropZone.styled";
+import { TItem, TItemImg } from "../../types/dragItems";
+import DropItems from "./dropItems/DropItems";
+import { Box, DropArea } from "./DropZone.styled";
 
 interface IProps {
   textItems: string;
@@ -10,14 +10,15 @@ interface IProps {
 }
 
 const DropZone: React.FC<IProps> = ({ textItems, itemImg }) => {
-  const nodeRef = useRef(null);
   const areaRef = useRef<HTMLDivElement>(null);
-
-  const [items, setItems] = useState<{}[]>([]);
+  const [items, setItems] = useState<TItem[]>([]);
 
   useEffect(() => {
     textItems &&
-      setItems((prev) => [...prev, { type: "text", text: textItems }]);
+      setItems((prev) => [
+        ...prev,
+        { type: "text", text: textItems, id: uuidv4() },
+      ]);
   }, [textItems]);
 
   const onHandleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -46,25 +47,7 @@ const DropZone: React.FC<IProps> = ({ textItems, itemImg }) => {
         onDragOver={onHandleDragOver}
         onDrop={onHandleDrop}
       >
-        {items.length > 0 &&
-          items.map((item: any, idx) => (
-            <Draggable
-              key={idx}
-              nodeRef={nodeRef}
-              defaultPosition={item.position}
-            >
-              {item.type === "img" ? (
-                <ImgItem
-                  src={item.src}
-                  alt={item.alt}
-                  ref={nodeRef}
-                  draggable={false}
-                />
-              ) : (
-                <TextItem ref={nodeRef}>{item.text}</TextItem>
-              )}
-            </Draggable>
-          ))}
+        {items.length > 0 && <DropItems items={items} />}
       </DropArea>
     </Box>
   );
