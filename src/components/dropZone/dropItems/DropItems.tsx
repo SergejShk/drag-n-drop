@@ -34,6 +34,7 @@ const DropItems: React.FC<IProps> = ({ items }) => {
     };
 
     const onMouseMove = (e: MouseEvent) => {
+      e.preventDefault();
       if (!isClicked.current) return;
 
       const nextX = e.clientX - coords.current.startX + coords.current.lastX;
